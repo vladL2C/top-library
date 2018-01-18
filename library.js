@@ -27,6 +27,15 @@ function Book(author, title, number, read) {
   this.read = read;
 }
 
+Book.prototype.paragraph = function() {
+  return `The Author of the book is ${this.author} you can already see the title
+  which is ${this.title}, the number of pages I have read is ${this.number}.`
+};
+
+Book.prototype.toggleRead = function() {
+  return this.read = !this.read;
+};
+
 myLibrary.push(new Book("Roald Dahl", "harry potter", 1000, true));
 
 function addBookToLibrary() {
@@ -37,13 +46,19 @@ function addBookToLibrary() {
   render();
 }
 
+function removeBook(index) {
+  myLibrary.splice(index,1);
+}
+
 function render() {
-  myLibrary.forEach((book) => {
-    createCard(book);
+  myLibrary.forEach((book,index) => {
+    createCard(book,index);
   });
 }
 
-function createCard(book) {
+
+
+function createCard(book,index) {
 
   let cardContainer = document.createElement('div');
   cardContainer.setAttribute('class','card');
@@ -65,14 +80,16 @@ function createCard(book) {
   let mainContent = document.createElement('div');
   mainContent.setAttribute('class','content');
   cardContent.appendChild(mainContent);
-
+  mainContent.textContent = book.paragraph();
+  console.log(book);
   let footer = document.createElement('footer');
   footer.setAttribute('class','card-footer');
   cardContainer.appendChild(footer);
 
   let footerItem = document.createElement('a');
   footerItem.setAttribute('class','card-footer-item');
-  footerItem.textContent = "Read";
+  footerItem.textContent = book.read ? "Mark as not read" : "Mark as Read";
+  book.read ? footerItem.style.color = '#3273dc' : footerItem.style.color = 'red';
   footer.appendChild(footerItem);
 
   let footerItem2 = document.createElement('a');
@@ -80,10 +97,19 @@ function createCard(book) {
   footerItem2.textContent = "Delete This Book";
   footer.appendChild(footerItem2);
   column.appendChild(cardContainer);
-  footerItem2.addEventListener('click',function(){
-    
-    myLibrary.splice(0,1);
+  footerItem2.dataset.index = index;
+  
+  footerItem2.addEventListener('click',function() {
+    removeBook(index);
     cardContainer.parentNode.removeChild(cardContainer);
   });
+
+  footerItem.addEventListener('click', function() {
+    book.toggleRead();
+    footerItem.textContent = book.read ? "Mark as not read" : "Mark as Read";
+    book.read ? footerItem.style.color = '#3273dc' : footerItem.style.color = 'red';
+  });
+
 }
 
+render();
