@@ -72,12 +72,18 @@ function createCard(book) {
 
   let footerItem = document.createElement('a');
   footerItem.setAttribute('class','card-footer-item');
+  footerItem.textContent = "Read";
   footer.appendChild(footerItem);
 
   let footerItem2 = document.createElement('a');
   footerItem2.setAttribute('class','card-footer-item');
+  footerItem2.textContent = "Delete This Book";
   footer.appendChild(footerItem2);
-
   column.appendChild(cardContainer);
+  footerItem2.addEventListener('click',function(){
+    
+    myLibrary.splice(0,1);
+    cardContainer.parentNode.removeChild(cardContainer);
+  });
 }
 

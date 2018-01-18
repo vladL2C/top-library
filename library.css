@@ -22,3 +22,7 @@ a.button.is-success{
 .column.is-three-fifths.is-offset-one-fifth {
   margin-top: 2rem;
 }
+
+.card {
+  margin-top: 2rem;
+}
