@@ -33,6 +33,7 @@ function addBookToLibrary() {
   myLibrary.push(new Book(form.author.value, form.title.value,
     form.number.value, form.read.checked));
   modal.classList.remove('is-active');
+  column.innerHTML = "";
   render();
 }
 
