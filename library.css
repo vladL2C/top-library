@@ -1,0 +1,24 @@
+.title {
+  text-align: center;
+}
+
+div.modal-background {
+  background-color: #F44336;
+}
+
+label.checkbox{
+  color: black;
+}
+
+label.label {
+  color: black;
+  font-weight: normal;
+}
+
+a.button.is-success{
+  display: block;
+}
+
+.column.is-three-fifths.is-offset-one-fifth {
+  margin-top: 2rem;
+}
